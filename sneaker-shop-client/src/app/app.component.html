@@ -1,0 +1,402 @@
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="logo">
+      SOLE<span>STOCK</span>
+    </div>
+
+    <p class="subtitle">Sneaker Shop Management</p>
+
+    <nav>
+      <button
+        [class.active]="activeSection === 'dashboard'"
+        (click)="activeSection = 'dashboard'">
+        Dashboard
+      </button>
+
+      <button
+        [class.active]="activeSection === 'inventory'"
+        (click)="activeSection = 'inventory'">
+        Inventory
+      </button>
+
+      <button
+        [class.active]="activeSection === 'orders'"
+        (click)="activeSection = 'orders'">
+        Order History
+      </button>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">ADMIN PORTAL</p>
+        <h1>
+          {{
+            activeSection === 'dashboard'
+              ? 'Dashboard'
+              : activeSection === 'inventory'
+              ? 'Sneaker Inventory'
+              : 'Order History'
+          }}
+        </h1>
+      </div>
+
+      <div class="status">
+        <span></span>
+        API Connected
+      </div>
+    </header>
+
+    <p class="error-message" *ngIf="message">
+      {{ message }}
+    </p>
+
+    <!-- Dashboard -->
+    <section *ngIf="activeSection === 'dashboard'">
+      <div class="cards">
+        <article class="stat-card">
+          <p>Total Products</p>
+          <strong>{{ totalProducts }}</strong>
+          <small>Unique sneaker records</small>
+        </article>
+
+        <article class="stat-card">
+          <p>Total Brands</p>
+          <strong>{{ totalBrands }}</strong>
+          <small>Available brands</small>
+        </article>
+
+        <article class="stat-card">
+          <p>Units in Stock</p>
+          <strong>{{ totalStock }}</strong>
+          <small>All available pairs</small>
+        </article>
+
+        <article class="stat-card accent">
+          <p>Inventory Value</p>
+          <strong>
+            {{ inventoryValue | currency:'PHP':'symbol':'1.0-2' }}
+          </strong>
+          <small>Current stock value</small>
+        </article>
+      </div>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">STOCK ALERT</p>
+            <h2>Low-stock sneakers</h2>
+          </div>
+
+          <button
+            class="primary-button"
+            (click)="activeSection = 'inventory'">
+            Manage inventory
+          </button>
+        </div>
+
+        <div class="empty-state" *ngIf="lowStockItems.length === 0">
+          All products have sufficient stock.
+        </div>
+
+        <div class="table-wrapper" *ngIf="lowStockItems.length > 0">
+          <table>
+            <thead>
+              <tr>
+                <th>Sneaker</th>
+                <th>Code</th>
+                <th>Brand</th>
+                <th>Stock</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let item of lowStockItems">
+                <td>{{ item.name }}</td>
+                <td>{{ item.code }}</td>
+                <td>{{ item.brand }}</td>
+                <td>
+                  <span class="stock low">
+                    {{ item.quantity }} left
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- Inventory -->
+    <section *ngIf="activeSection === 'inventory'">
+      <section class="panel">
+        <div class="inventory-toolbar">
+          <input
+            type="search"
+            [(ngModel)]="searchTerm"
+            (input)="applyFilter()"
+            placeholder="Search by name, code, or brand">
+
+          <button class="primary-button" (click)="openAddForm()">
+            + Add Sneaker
+          </button>
+        </div>
+
+        <form
+          class="item-form"
+          *ngIf="showItemForm"
+          (ngSubmit)="saveItem()">
+
+          <div class="form-title">
+            <h2>
+              {{ editingItemId === null ? 'Add Sneaker' : 'Edit Sneaker' }}
+            </h2>
+
+            <button
+              type="button"
+              class="close-button"
+              (click)="cancelItemForm()">
+              ×
+            </button>
+          </div>
+
+          <div class="form-grid">
+            <label>
+              Sneaker name
+              <input
+                type="text"
+                name="name"
+                [(ngModel)]="formItem.name"
+                required>
+            </label>
+
+            <label>
+              Product code
+              <input
+                type="text"
+                name="code"
+                [(ngModel)]="formItem.code"
+                required>
+            </label>
+
+            <label>
+              Brand
+              <input
+                type="text"
+                name="brand"
+                [(ngModel)]="formItem.brand"
+                required>
+            </label>
+
+            <label>
+              Unit price
+              <input
+                type="number"
+                name="unitPrice"
+                [(ngModel)]="formItem.unitPrice"
+                min="1"
+                required>
+            </label>
+
+            <label>
+              Quantity
+              <input
+                type="number"
+                name="quantity"
+                [(ngModel)]="formItem.quantity"
+                min="0"
+                required>
+            </label>
+
+            <label>
+              Shoe size
+              <input
+                type="number"
+                name="size"
+                [(ngModel)]="formItem.size"
+                min="1"
+                step="0.5"
+                required>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button
+              type="button"
+              class="secondary-button"
+              (click)="cancelItemForm()">
+              Cancel
+            </button>
+
+            <button type="submit" class="primary-button">
+              {{ editingItemId === null ? 'Save Sneaker' : 'Save Changes' }}
+            </button>
+          </div>
+        </form>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Sneaker</th>
+                <th>Code</th>
+                <th>Brand</th>
+                <th>Size</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let item of filteredItems">
+                <td class="product-name">{{ item.name }}</td>
+                <td>{{ item.code }}</td>
+                <td>{{ item.brand }}</td>
+                <td>US {{ item.size }}</td>
+                <td>
+                  {{ item.unitPrice | currency:'PHP':'symbol':'1.0-2' }}
+                </td>
+                <td>
+                  <span
+                    class="stock"
+                    [class.low]="item.quantity <= 5"
+                    [class.out]="item.quantity === 0">
+                    {{
+                      item.quantity === 0
+                        ? 'Out of stock'
+                        : item.quantity + ' available'
+                    }}
+                  </span>
+                </td>
+                <td class="actions">
+                  <button
+                    class="order-button"
+                    (click)="openOrder(item)">
+                    Order
+                  </button>
+
+                  <button
+                    class="edit-button"
+                    (click)="openEditForm(item)">
+                    Edit
+                  </button>
+
+                  <button
+                    class="delete-button"
+                    (click)="deleteItem(item)">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="empty-state" *ngIf="filteredItems.length === 0">
+          No sneakers found.
+        </div>
+      </section>
+    </section>
+
+    <!-- Order history -->
+    <section *ngIf="activeSection === 'orders'">
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">SALES RECORDS</p>
+            <h2>Completed orders</h2>
+          </div>
+        </div>
+
+        <div class="empty-state" *ngIf="orders.length === 0">
+          There are no completed orders yet.
+        </div>
+
+        <div class="table-wrapper" *ngIf="orders.length > 0">
+          <table>
+            <thead>
+              <tr>
+                <th>Order number</th>
+                <th>Date</th>
+                <th>Sneaker</th>
+                <th>Code</th>
+                <th>Quantity</th>
+                <th>Unit price</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let order of orders">
+                <td>#{{ order.id }}</td>
+                <td>{{ order.orderDate }}</td>
+                <td>{{ order.itemName }}</td>
+                <td>{{ order.code }}</td>
+                <td>{{ order.quantity }}</td>
+                <td>
+                  {{ order.unitPrice | currency:'PHP':'symbol':'1.0-2' }}
+                </td>
+                <td class="product-name">
+                  {{ order.total | currency:'PHP':'symbol':'1.0-2' }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+</div>
+
+<!-- Order dialog -->
+<div class="modal-backdrop" *ngIf="selectedOrderItem">
+  <section class="order-modal">
+    <button class="modal-close" (click)="cancelOrder()">×</button>
+
+    <p class="eyebrow">NEW CUSTOMER ORDER</p>
+    <h2>{{ selectedOrderItem.name }}</h2>
+    <p>
+      {{ selectedOrderItem.brand }} ·
+      US Size {{ selectedOrderItem.size }}
+    </p>
+
+    <div class="order-details">
+      <div>
+        <span>Unit price</span>
+        <strong>
+          {{
+            selectedOrderItem.unitPrice
+              | currency:'PHP':'symbol':'1.0-2'
+          }}
+        </strong>
+      </div>
+
+      <div>
+        <span>Available</span>
+        <strong>{{ selectedOrderItem.quantity }} pairs</strong>
+      </div>
+    </div>
+
+    <label>
+      Order quantity
+      <input
+        type="number"
+        [(ngModel)]="orderQuantity"
+        min="1"
+        [max]="selectedOrderItem.quantity">
+    </label>
+
+    <div class="order-total">
+      <span>Order total</span>
+      <strong>
+        {{ orderTotal | currency:'PHP':'symbol':'1.0-2' }}
+      </strong>
+    </div>
+
+    <button class="primary-button full-button" (click)="placeOrder()">
+      Complete Order
+    </button>
+  </section>
+</div>

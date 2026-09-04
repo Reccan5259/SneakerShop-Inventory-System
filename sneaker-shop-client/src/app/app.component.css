@@ -1,0 +1,445 @@
+* {
+  box-sizing: border-box;
+}
+
+:host {
+  display: block;
+  min-height: 100vh;
+  color: #1d1d1f;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+  background: #f4f4f0;
+}
+
+.sidebar {
+  padding: 32px 22px;
+  color: white;
+  background: #151515;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: -1px;
+}
+
+.logo span {
+  color: #ff6b35;
+}
+
+.subtitle {
+  margin: 7px 0 35px;
+  color: #8e8e8e;
+  font-size: 12px;
+}
+
+nav {
+  display: grid;
+  gap: 9px;
+}
+
+nav button {
+  padding: 13px 15px;
+  color: #bdbdbd;
+  text-align: left;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+}
+
+nav button:hover,
+nav button.active {
+  color: white;
+  background: #ff6b35;
+}
+
+.main-content {
+  padding: 32px;
+  overflow-x: hidden;
+}
+
+.topbar,
+.panel-heading,
+.inventory-toolbar,
+.form-title,
+.form-actions,
+.order-details,
+.order-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar {
+  margin-bottom: 28px;
+}
+
+.topbar h1,
+.panel h2,
+.order-modal h2 {
+  margin: 4px 0;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #ff6b35;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.7px;
+}
+
+.status {
+  padding: 9px 13px;
+  border-radius: 99px;
+  background: white;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.status span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: #39ad60;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(170px, 1fr));
+  gap: 17px;
+  margin-bottom: 20px;
+}
+
+.stat-card,
+.panel,
+.item-form,
+.order-modal {
+  border: 1px solid #e7e7e2;
+  border-radius: 15px;
+  background: white;
+  box-shadow: 0 6px 20px rgba(20, 20, 20, 0.04);
+}
+
+.stat-card {
+  padding: 21px;
+}
+
+.stat-card p,
+.stat-card small {
+  color: #777;
+}
+
+.stat-card p {
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.stat-card strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 28px;
+}
+
+.stat-card.accent {
+  color: white;
+  border-color: #ff6b35;
+  background: #ff6b35;
+}
+
+.stat-card.accent p,
+.stat-card.accent small {
+  color: white;
+}
+
+.panel {
+  padding: 23px;
+}
+
+.panel-heading,
+.inventory-toolbar {
+  margin-bottom: 20px;
+}
+
+.primary-button,
+.secondary-button,
+.order-button,
+.edit-button,
+.delete-button {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.primary-button {
+  color: white;
+  background: #ff6b35;
+}
+
+.secondary-button {
+  color: #333;
+  background: #e9e9e5;
+}
+
+.inventory-toolbar input {
+  width: min(420px, 65%);
+  padding: 11px 14px;
+  border: 1px solid #d9d9d4;
+  border-radius: 9px;
+  outline: none;
+}
+
+.inventory-toolbar input:focus,
+.item-form input:focus,
+.order-modal input:focus {
+  border-color: #ff6b35;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 14px 11px;
+  text-align: left;
+  border-bottom: 1px solid #ecece8;
+  white-space: nowrap;
+}
+
+th {
+  color: #777;
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+td {
+  font-size: 13px;
+}
+
+.product-name {
+  font-weight: 800;
+}
+
+.stock {
+  padding: 6px 9px;
+  color: #267642;
+  border-radius: 99px;
+  background: #e5f7eb;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.stock.low {
+  color: #a06400;
+  background: #fff1cc;
+}
+
+.stock.out {
+  color: #a92d2d;
+  background: #ffe2e2;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+.order-button {
+  color: white;
+  background: #151515;
+}
+
+.edit-button {
+  color: #805000;
+  background: #fff0c7;
+}
+
+.delete-button {
+  color: #a92d2d;
+  background: #ffe4e4;
+}
+
+.item-form {
+  margin-bottom: 22px;
+  padding: 21px;
+  background: #fafaf8;
+}
+
+.form-title {
+  margin-bottom: 18px;
+}
+
+.close-button,
+.modal-close {
+  border: 0;
+  background: transparent;
+  font-size: 25px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.form-grid label,
+.order-modal label {
+  display: grid;
+  gap: 7px;
+  color: #555;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.form-grid input,
+.order-modal input {
+  width: 100%;
+  padding: 11px;
+  border: 1px solid #d9d9d4;
+  border-radius: 8px;
+  outline: none;
+}
+
+.form-actions {
+  justify-content: flex-end;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.empty-state,
+.error-message {
+  padding: 20px;
+  text-align: center;
+}
+
+.empty-state {
+  color: #777;
+}
+
+.error-message {
+  color: #a92d2d;
+  border-radius: 9px;
+  background: #ffe4e4;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.order-modal {
+  position: relative;
+  width: min(430px, 100%);
+  padding: 27px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 13px;
+  right: 15px;
+}
+
+.order-details {
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.order-details div {
+  flex: 1;
+  padding: 14px;
+  border-radius: 9px;
+  background: #f4f4f0;
+}
+
+.order-details span,
+.order-details strong {
+  display: block;
+}
+
+.order-details span,
+.order-total span {
+  margin-bottom: 6px;
+  color: #777;
+  font-size: 11px;
+}
+
+.order-total {
+  margin: 22px 0;
+  padding-top: 18px;
+  border-top: 1px solid #ddd;
+}
+
+.order-total strong {
+  color: #ff6b35;
+  font-size: 23px;
+}
+
+.full-button {
+  width: 100%;
+}
+
+@media (max-width: 950px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    padding: 20px;
+  }
+
+  nav {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  nav button {
+    text-align: center;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+
+  .cards,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

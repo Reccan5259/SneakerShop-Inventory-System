@@ -1,0 +1,15 @@
+C:\Users\ramha\OneDrive\Desktop\SneakerShop\SneakerShop.WinForms\bin\Debug\net10.0-windows\SneakerShop.WinForms.exe
+C:\Users\ramha\OneDrive\Desktop\SneakerShop\SneakerShop.WinForms\bin\Debug\net10.0-windows\SneakerShop.WinForms.deps.json
+C:\Users\ramha\OneDrive\Desktop\SneakerShop\SneakerShop.WinForms\bin\Debug\net10.0-windows\SneakerShop.WinForms.runtimeconfig.json
+C:\Users\ramha\OneDrive\Desktop\SneakerShop\SneakerShop.WinForms\bin\Debug\net10.0-windows\SneakerShop.WinForms.dll
+C:\Users\ramha\OneDrive\Desktop\SneakerShop\SneakerShop.WinForms\bin\Debug\net10.0-windows\SneakerShop.WinForms.pdb
+C:\Users\ramha\OneDrive\Desktop\SneakerShop\SneakerShop.WinForms\obj\Debug\net10.0-windows\SneakerShop.WinForms.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ramha\OneDrive\Desktop\SneakerShop\SneakerShop.WinForms\obj\Debug\net10.0-windows\SneakerShop.WinForms.AssemblyInfoInputs.cache
+C:\Users\ramha\OneDrive\Desktop\SneakerShop\SneakerShop.WinForms\obj\Debug\net10.0-windows\SneakerShop.WinForms.AssemblyInfo.cs
+C:\Users\ramha\OneDrive\Desktop\SneakerShop\SneakerShop.WinForms\obj\Debug\net10.0-windows\SneakerShop.WinForms.csproj.CoreCompileInputs.cache
+C:\Users\ramha\OneDrive\Desktop\SneakerShop\SneakerShop.WinForms\obj\Debug\net10.0-windows\SneakerShop.WinForms.sourcelink.json
+C:\Users\ramha\OneDrive\Desktop\SneakerShop\SneakerShop.WinForms\obj\Debug\net10.0-windows\SneakerShop.WinForms.dll
+C:\Users\ramha\OneDrive\Desktop\SneakerShop\SneakerShop.WinForms\obj\Debug\net10.0-windows\refint\SneakerShop.WinForms.dll
+C:\Users\ramha\OneDrive\Desktop\SneakerShop\SneakerShop.WinForms\obj\Debug\net10.0-windows\SneakerShop.WinForms.pdb
+C:\Users\ramha\OneDrive\Desktop\SneakerShop\SneakerShop.WinForms\obj\Debug\net10.0-windows\SneakerShop.WinForms.genruntimeconfig.cache
+C:\Users\ramha\OneDrive\Desktop\SneakerShop\SneakerShop.WinForms\obj\Debug\net10.0-windows\ref\SneakerShop.WinForms.dll
