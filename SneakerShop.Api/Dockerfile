@@ -1,11 +1,12 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-COPY ["SneakerShop.Api/SneakerShop.Api.csproj", "SneakerShop.Api/"]
-RUN dotnet restore "SneakerShop.Api/SneakerShop.Api.csproj"
-
 COPY . .
-WORKDIR "/src/SneakerShop.Api"
+
+WORKDIR /src/SneakerShop.Api
+
+RUN rm -rf bin obj
+RUN dotnet restore "SneakerShop.Api.csproj"
 
 RUN dotnet publish "SneakerShop.Api.csproj" \
     -c Release \
