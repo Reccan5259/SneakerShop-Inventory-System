@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SneakerShop.WinForms")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2b373b246af73c2ce3dc907d317c87bd2c2b3588")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+017957a6c4fc710570a06a1e6aa2401f864ee2c0")]
 [assembly: System.Reflection.AssemblyProductAttribute("SneakerShop.WinForms")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SneakerShop.WinForms")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -8,7 +8,7 @@ namespace SneakerShop.WinForms.Services
     public sealed class ApiService
     {
         private const string BaseUrl =
-            "http://localhost:5000/";
+    "https://sneakershop-inventory-system.onrender.com/";
 
         private readonly HttpClient _client;
 
